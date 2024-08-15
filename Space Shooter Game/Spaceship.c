@@ -1,16 +1,28 @@
-/*#include "Spaceship.h"
+#include "Spaceship.h"
 
-Spaceship:Spaceship() {
-	image = LoadTexture("images/spaceship.png"); //load the image here
-	position.x = 100;
-	position.y = 100;
-
+void FireLaser(Spaceship* spaceship)
+{
+	if (GetTime() - spaceship->lastFireTime >= 0.35) {
+		for (int i = 0; i < MAX_LASERS; i++) {
+			if (!spaceship->lasers[i].active) {
+				spaceship->lasers[i].x = spaceship->position.x + spaceship->image.width / 2 - 2;
+				spaceship->lasers[i].y = spaceship->position.y;
+				spaceship->lasers[i].speed = -6;
+				spaceship->lasers[i].active = true;
+				spaceship->lastFireTime = GetTime();
+				break;
+			}
+		}
+	}
 }
 
-Spaceship::~Spaceship{
-	UnloadImage(image); //to free up memory as we close the window
+//function
+//to move the spaceship to the left
+void MoveLeft(Spaceship* spaceship) {
+	spaceship->position.x -= 7;
 }
-
-void Spaceship::Draw() {
-	DrawTextureV(image, position, WHITE);
-}*/
+//function
+//to move the spaceship to the right
+void MoveRight(Spaceship* spaceship) {
+	spaceship->position.x += 7;
+}

@@ -139,13 +139,17 @@
   <ItemGroup>
     <ClCompile Include="Alien.c" />
     <ClCompile Include="Entity.c" />
+    <ClCompile Include="Laser.c" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="Obstacle.c" />
     <ClCompile Include="player.c" />
     <ClCompile Include="Spaceship.c" />
+    <ClCompile Include="TypeDefs.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="Alien.h" />
+    <ClInclude Include="Laser.h" />
+    <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Spaceship.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

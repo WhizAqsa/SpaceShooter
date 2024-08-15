@@ -30,15 +30,27 @@
     <ClCompile Include="Spaceship.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Laser.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TypeDefs.h">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstacle.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Entity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Spaceship.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Alien.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Laser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstacle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
