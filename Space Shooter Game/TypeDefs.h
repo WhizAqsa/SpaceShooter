@@ -17,6 +17,8 @@
 
 #define LEVEL_WIDTH 8
 
+#define ALIEN_SPEED 3
+
 typedef struct Obstacle {
 	int x;
 	int y;
@@ -49,10 +51,9 @@ typedef struct Spaceship {
 */
 typedef struct Alien {
 	Vector2 position;
-	bool active;
 	int lives;
 	int type;
-	Image image;
+	Texture2D image;
 } Alien;
 
 

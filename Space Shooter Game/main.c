@@ -9,9 +9,18 @@
 
 
 // Global vars
-Alien aliens[ALIEN_SIZE];
+Alien aliens[5][LEVEL_WIDTH];
 Obstacle obstacles[OBSTACLES_SIZE];
 Spaceship s;
+int currentLevelHeight = 3;
+
+int currentLevel[5][LEVEL_WIDTH] = {
+	{ 0, 0, 0, 0, 0, 0, 0, 0 },
+	{ 0, 0, 0, 0, 0, 0, 0, 0 },
+	{ 0, 0, 0, 0, 0, 0, 0, 0 },
+	//{ 0, 0, 0, 0, 0, 0, 0, 0 },
+	//{ 0, 0, 0, 0, 0, 0, 0, 0 },
+};
 
 int main() {
 	//creating an object of window 
@@ -39,7 +48,7 @@ int main() {
 	}
 
 	InitializeObstacles(obstacles);
-	InitializeAliens(aliens);
+	InitializeAliens(aliens, currentLevel, currentLevelHeight);
 
 
 	//game loop
@@ -53,7 +62,7 @@ int main() {
 		{
 			DrawObstacle(&obstacles[i]);
 		}
-		DrawAliens(aliens);
+		DrawAliens(aliens, currentLevelHeight);
 
 		// Input Handlings
 		if (IsKeyDown(KEY_LEFT)) {
@@ -78,13 +87,13 @@ int main() {
 			if (!laser->active) continue;
 
 			HandleObstalesCollisionsWithLaser(laser, obstacles);
-			HandleAlienCollisionsWithLaser(laser, aliens);
+			HandleAlienCollisionsWithLaser(laser, aliens, currentLevelHeight);
 		}
 
 
 		// Updating States
 		UpdateLasers(&s);
-		UpdateAliens(aliens);
+		UpdateAliens(aliens, currentLevelHeight);
 
 		EndDrawing();
 	}
