@@ -1,37 +1,6 @@
 #include "Alien.h"
 
 void InitializeAliens(Alien aliens[]) {
-
-    //int obstacleWidth = GRID_COL * PIXEL_SIZE;
-    //int obstacleHeight = GRID_ROWS * PIXEL_SIZE;
-    //float gap = (GetScreenWidth() - (4 * obstacleWidth)) / 5;
-
-    ////initilize grid of blocks as obstacle
-    //int shieldPixelArt[GRID_ROWS][GRID_COL] = {
-    //   {0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0},
-    //   {0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0},
-    //   {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0},
-    //   {0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0},
-    //   {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    //   {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    //   {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    //   {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    //   {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    //   {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-    //   {1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1},
-    //   {1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1},
-    //   {1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1}
-    //};
-
-    //for (int i = 0; i < OBSTACLES_SIZE; i++) {
-    //    Obstacle obstacle;
-    //    obstacle.x = i * obstacleWidth + (i + 1) * gap;
-    //    obstacle.y = GetScreenHeight() - SPACESHIP_SIZE * 2 - obstacleHeight;
-    //    memcpy(obstacle.grid, shieldPixelArt, sizeof(shieldPixelArt));
-
-    //    obstacles[i] = obstacle;
-    //}
-
     for (int i = 0; i < MAX_ALIENS; i++) {
         aliens[i].position.x = GetRandomValue(0, GetScreenWidth() - ALIEN_SIZE);
         aliens[i].position.y = GetRandomValue(-GetScreenHeight(), -ALIEN_SIZE); // Start off-screen above
