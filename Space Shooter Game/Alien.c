@@ -1,4 +1,5 @@
 #include "Alien.h"
+#include<stdlib.h>
 
 void InitializeAliens(Alien aliens[][LEVEL_WIDTH], int levelDesign[][LEVEL_WIDTH], int height) 
 {
@@ -8,6 +9,7 @@ void InitializeAliens(Alien aliens[][LEVEL_WIDTH], int levelDesign[][LEVEL_WIDTH
     {
         for (int j = 0; j < LEVEL_WIDTH; j++)
         {
+            aliens[i][j].fireRate = 1.0f + (float)rand() / RAND_MAX * 0.5f; // Random fire rate between 1.0 and 1.5 seconds
             Alien* cur = &aliens[i][j];
 
             switch (levelDesign[i][j])
@@ -125,6 +127,23 @@ void HandleAlienCollisionsWithLaser(Laser* laser, Alien aliens[][LEVEL_WIDTH], i
             if (CheckCollisionRecs((Rectangle) { cur->position.x, cur->position.y, cur->image.width, cur->image.height }, laserRect)) {
                 if (cur->lives > 0) cur->lives--;
                 laser->active = false;
+                break;
+            }
+        }
+    }
+}
+
+void FireBullet(Alien* alien)
+{
+    alien->fireTimer += GetFrameTime();
+    if (alien->fireTimer >= alien->fireRate) {
+        for (int i = 0; i < MAX_BULLETS; i++) {
+            if (!alien->bullets[i].active) {
+                alien->bullets[i].x = alien->position.x + alien->image.width / 2 - 2;
+                alien->bullets[i].y = alien->position.y;
+                alien->bullets[i].speed = -6;
+                alien->bullets[i].active = true;
+                alien->fireTimer = 0.0f;
                 break;
             }
         }

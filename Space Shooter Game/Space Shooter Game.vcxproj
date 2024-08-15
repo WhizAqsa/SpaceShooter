@@ -138,16 +138,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Alien.c" />
-    <ClCompile Include="Entity.c" />
+    <ClCompile Include="Bullet.c" />
     <ClCompile Include="Laser.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="Obstacle.c" />
-    <ClCompile Include="player.c" />
     <ClCompile Include="Spaceship.c" />
     <ClCompile Include="TypeDefs.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Alien.h" />
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Laser.h" />
     <ClInclude Include="Obstacle.h" />
     <ClInclude Include="Spaceship.h" />

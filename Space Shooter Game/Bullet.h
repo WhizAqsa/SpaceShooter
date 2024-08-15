@@ -1,10 +1,8 @@
-#pragma once
 
-#include"Entity.h"
+#include "Typedefs.h"
+
 #ifndef _BULLET_
 #define _BULLET_
 
-class Bullet : public Entity {
-
-};
+void UpdateBullet(Alien*);
 #endif // !_BULLET_

@@ -1,11 +1,13 @@
 #include<raylib.h>
 #include<stdio.h>
 
+
 #include "TypeDefs.h"
 #include "Alien.h"
 #include "Laser.h"
 #include "Spaceship.h"
 #include "Obstacle.h"
+#include "Bullet.h"
 
 
 // Global vars
@@ -81,6 +83,16 @@ int main() {
 			FireLaser(&s);
 		}
 
+		//Aliens bullet fire 
+		for (int i = 0; i < currentLevelHeight; i++) {
+			for (int j = 0; j < LEVEL_WIDTH; j++) {
+				Alien* alien = &aliens[i][j];
+				if (alien->lives > 0) {
+					FireLaser(alien);
+				}
+			}
+		}
+
 		// Collision detection
 		for (int i = 0; i < MAX_LASERS; i++) {
 			Laser* laser = &s.lasers[i];
@@ -94,7 +106,7 @@ int main() {
 		// Updating States
 		UpdateLasers(&s);
 		UpdateAliens(aliens, currentLevelHeight);
-
+		UpdateBullet(aliens);
 		EndDrawing();
 	}
 	//unload spaceship texture and image

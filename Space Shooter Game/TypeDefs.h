@@ -9,6 +9,10 @@
 #define LASER_HEIGHT 15
 #define LASER_WIDTH 4
 
+#define BULLET_WIDTH 4
+#define BULLET_HEIGHT 15
+#define MAX_BULLETS 5
+
 #define PIXEL_SIZE 3
 #define OBSTACLES_SIZE 4
 
@@ -41,6 +45,13 @@ typedef struct Spaceship {
 	double lastFireTime;
 } Spaceship;
 
+typedef struct Bullet {
+	int x;
+	int y;
+	int speed;
+	bool active;
+}Bullet;
+
 /**
 * Here is the explanation for Alien
 * 1. Lives is int because it shows how many bullets are required to kill this alien
@@ -54,6 +65,9 @@ typedef struct Alien {
 	int lives;
 	int type;
 	Texture2D image;
+	Bullet bullets[MAX_BULLETS];
+	float fireRate;
+	float fireTimer;
 } Alien;
 
 
