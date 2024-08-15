@@ -14,8 +14,6 @@ Obstacle obstacles[OBSTACLES_SIZE];
 Spaceship s;
 
 int main() {
-	
-
 	//creating an object of window 
    //specifying its width, height and title
 
@@ -40,7 +38,7 @@ int main() {
 		s.lasers[i].active = false;
 	}
 
-	CreateObstacles(obstacles);
+	InitializeObstacles(obstacles);
 	InitializeAliens(aliens);
 
 

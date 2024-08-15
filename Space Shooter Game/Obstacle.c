@@ -46,7 +46,7 @@ void HandleObstalesCollisionsWithLaser(Laser* laser, Obstacle obstacles[])
 
 //function to create an obstacle
 
-void CreateObstacles(Obstacle obstacles[]) {
+void InitializeObstacles(Obstacle obstacles[]) {
 	int obstacleWidth = GRID_COL * PIXEL_SIZE;
 	int obstacleHeight = GRID_ROWS * PIXEL_SIZE;
 	float gap = (GetScreenWidth() - (4 * obstacleWidth)) / 5;

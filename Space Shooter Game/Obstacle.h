@@ -4,4 +4,4 @@
 
 void DrawObstacle(Obstacle* obstacle); 
 void HandleObstalesCollisionsWithLaser(Laser* laser, Obstacle obstacles[]);
-void CreateObstacles(Obstacle obstacles[]);
+void InitializeObstacles(Obstacle obstacles[]);
