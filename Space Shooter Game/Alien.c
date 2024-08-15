@@ -2,7 +2,7 @@
 
 void InitializeAliens(Alien aliens[]) {
     for (int i = 0; i < MAX_ALIENS; i++) {
-        aliens[i].position.x = GetRandomValue(0, GetScreenWidth() - ALIEN_SIZE);
+        aliens[i].position.x = GetRandomValue(0, GetScreenWidth() -ALIEN_SIZE);
         aliens[i].position.y = GetRandomValue(-GetScreenHeight(), -ALIEN_SIZE); // Start off-screen above
         aliens[i].active = true;
     }
