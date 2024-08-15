@@ -15,6 +15,8 @@
 #define GRID_ROWS 13 
 #define GRID_COL 23
 
+#define LEVEL_WIDTH 8
+
 typedef struct Obstacle {
 	int x;
 	int y;
@@ -37,9 +39,20 @@ typedef struct Spaceship {
 	double lastFireTime;
 } Spaceship;
 
+/**
+* Here is the explanation for Alien
+* 1. Lives is int because it shows how many bullets are required to kill this alien
+* 2. type int:
+*   - 0 -> Simple type, just fires after some delay and with the given probability, has 1 life
+*   - 1 -> Fires and can randomly goes to player current position at that time and comes back if not killed, has 2 lives
+*   - 2 -> Fires in the direction of player, and has 3 lives.
+*/
 typedef struct Alien {
 	Vector2 position;
 	bool active;
+	int lives;
+	int type;
+	Image image;
 } Alien;
 
 
