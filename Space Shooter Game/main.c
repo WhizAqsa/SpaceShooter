@@ -24,6 +24,8 @@ int currentLevel[5][LEVEL_WIDTH] = {
 	//{ 0, 0, 0, 0, 0, 0, 0, 0 },
 };
 
+
+
 int main() {
 	//creating an object of window 
    //specifying its width, height and title
@@ -47,6 +49,15 @@ int main() {
 	// Initialize the spaceship's lasers
 	for (int i = 0; i < MAX_LASERS; i++) {
 		s.lasers[i].active = false;
+	}
+
+	// Initialize the alien's bullets
+	for (int i = 0; i < currentLevelHeight; i++) {
+		for (int j = 0; j < LEVEL_WIDTH; j++) {
+			for (int k = 0; k < MAX_BULLETS; k++) {
+				aliens[i][j].bullets[k].active = false; // Initialize bullets
+			}
+		}
 	}
 
 	InitializeObstacles(obstacles);
@@ -88,7 +99,7 @@ int main() {
 			for (int j = 0; j < LEVEL_WIDTH; j++) {
 				Alien* alien = &aliens[i][j];
 				if (alien->lives > 0) {
-					FireLaser(alien);
+					FireBullet(alien);
 				}
 			}
 		}
@@ -106,7 +117,8 @@ int main() {
 		// Updating States
 		UpdateLasers(&s);
 		UpdateAliens(aliens, currentLevelHeight);
-		UpdateBullet(aliens);
+
+
 		EndDrawing();
 	}
 	//unload spaceship texture and image

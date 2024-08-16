@@ -9,6 +9,7 @@ void UpdateBullet(Alien* alien) {
             if (bullet->y > GetScreenHeight() || bullet->y < 0) {
                 bullet->active = false;
             }
+            DrawCircle(alien->bullets[i].x, alien->bullets[i].y, PIXEL_SIZE, RED);
         }
     }
 }

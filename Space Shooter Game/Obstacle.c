@@ -44,6 +44,24 @@ void HandleObstalesCollisionsWithLaser(Laser* laser, Obstacle obstacles[])
 	}
 }
 
+void HandleObstacleCollisionWithCircle(Obstacle* ob, Vector2 center, int radius) 
+{
+	for (unsigned int row = 0; row < GRID_ROWS; row++) {
+		for (unsigned int col = 0; col < GRID_COL; col++) {
+			if (ob->grid[row][col] == 1) {
+				float pos_x = ob->x + col * PIXEL_SIZE;
+				float pos_y = ob->y + row * PIXEL_SIZE;
+				Rectangle obstacleRect = { pos_x, pos_y, PIXEL_SIZE, PIXEL_SIZE };
+
+				if (CheckCollisionCircleRec(center, radius, obstacleRect)) {
+					ob->grid[row][col] = 0;
+					break;
+				}
+			}
+		}
+	}
+}
+
 //function to create an obstacle
 
 void InitializeObstacles(Obstacle obstacles[]) {

@@ -1,16 +1,17 @@
 #include "Alien.h"
+#include "Bullet.h"
+#include "Obstacle.h"
 #include<stdlib.h>
 
 void InitializeAliens(Alien aliens[][LEVEL_WIDTH], int levelDesign[][LEVEL_WIDTH], int height) 
 {
 
-
     for (int i = 0; i < height; i++) 
     {
         for (int j = 0; j < LEVEL_WIDTH; j++)
         {
-            aliens[i][j].fireRate = 1.0f + (float)rand() / RAND_MAX * 0.5f; // Random fire rate between 1.0 and 1.5 seconds
             Alien* cur = &aliens[i][j];
+            cur->fireRate = (float)GetRandomValue(4, 15); // Random fire rate between 1.0 and 1.5 seconds
 
             switch (levelDesign[i][j])
             {
@@ -45,15 +46,9 @@ void InitializeAliens(Alien aliens[][LEVEL_WIDTH], int levelDesign[][LEVEL_WIDTH
         }
     }
 }
-
-//[    ^
-//    [0, 1, 1]
-//    [0, 1, 0]
-//    [0, 1, 1]
-//]
-
 void UpdateAliens(Alien aliens[][LEVEL_WIDTH], int height) {
     static int currentDirection = 1;
+    int MOVE_DOWN_DISTANCE = 4;
 
     Alien leftFirst;
     for (int j = 0; j < LEVEL_WIDTH; j++)
@@ -65,6 +60,7 @@ void UpdateAliens(Alien aliens[][LEVEL_WIDTH], int height) {
             {
                 hasFound = 1;
                 leftFirst = aliens[i][j];
+                
                 break;
             }
         }
@@ -95,7 +91,16 @@ void UpdateAliens(Alien aliens[][LEVEL_WIDTH], int height) {
     {
         for (int j = 0; j < LEVEL_WIDTH; j++)
         {
-            aliens[i][j].position.x += currentDirection * ALIEN_SPEED;
+            Alien* alien = &aliens[i][j];
+            if (alien->lives > 0) {
+                // ... other code ...
+
+                alien->position.x += currentDirection * ALIEN_SPEED;
+                // Update and fire bullets for this alien
+                FireBullet(alien);
+                UpdateBullet(alien);
+            }
+
         }
     }
 }
@@ -139,13 +144,32 @@ void FireBullet(Alien* alien)
     if (alien->fireTimer >= alien->fireRate) {
         for (int i = 0; i < MAX_BULLETS; i++) {
             if (!alien->bullets[i].active) {
-                alien->bullets[i].x = alien->position.x + alien->image.width / 2 - 2;
-                alien->bullets[i].y = alien->position.y;
-                alien->bullets[i].speed = -6;
+                alien->bullets[i].x = alien->position.x + alien->image.width / 2;
+                alien->bullets[i].y = alien->position.y + alien->image.height;
+                alien->bullets[i].speed = 3;
                 alien->bullets[i].active = true;
                 alien->fireTimer = 0.0f;
                 break;
             }
         }
     }
+}
+void HandleBulletCollisionWithObstacles(Obstacle obstacles[], Bullet* b,Alien* alien) 
+{
+    if (!b->active) return;
+
+    for (int i = 0; i < OBSTACLES_SIZE; i++)
+    {
+        Obstacle* ob = &obstacles[i];
+        Vector2 center = { b->x, b->y };
+        if (!CheckCollisionCircleRec(center, PIXEL_SIZE, (Rectangle) { ob->x, ob->y, GRID_COL* PIXEL_SIZE, GRID_ROWS* PIXEL_SIZE }))
+            continue;
+
+        HandleObstacleCollisionWithCircle(ob, center, PIXEL_SIZE);
+        b->active = false;
+        break;
+    }
+}
+void HandleBulletCollisionWithSpaceship(Spaceship* s, Bullet* b) {
+
 }

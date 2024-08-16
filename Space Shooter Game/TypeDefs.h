@@ -9,8 +9,6 @@
 #define LASER_HEIGHT 15
 #define LASER_WIDTH 4
 
-#define BULLET_WIDTH 4
-#define BULLET_HEIGHT 15
 #define MAX_BULLETS 5
 
 #define PIXEL_SIZE 3
