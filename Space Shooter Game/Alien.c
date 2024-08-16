@@ -38,17 +38,35 @@ void InitializeAliens(Alien aliens[][LEVEL_WIDTH], int levelDesign[][LEVEL_WIDTH
 
             }
 
-            // margin top: 30px
+            // margin top: 60px
             // gap: 20px 40px
             
-            cur->position.y = 30 + i * (20 + cur->image.height);
+            cur->position.y = 60 + i * (20 + cur->image.height);
             cur->position.x = j * (40 + cur->image.width);
         }
     }
 }
 void UpdateAliens(Alien aliens[][LEVEL_WIDTH], int height) {
     static int currentDirection = 1;
-    int MOVE_DOWN_DISTANCE = 4;
+
+    bool alienRemaining = 0;
+    for (int j = 0; j < LEVEL_WIDTH; j++)
+    {
+        for (int i = 0; i < height; i++)
+        {
+            if (aliens[i][j].lives > 0)
+            {
+                alienRemaining = 1;
+                break;
+            }
+        }
+        if (alienRemaining) break;
+    }
+    if (!alienRemaining)
+    {
+        printf("Aliens are dead HUHAA\n");
+        return;
+    }
 
     Alien leftFirst;
     for (int j = 0; j < LEVEL_WIDTH; j++)
@@ -96,11 +114,10 @@ void UpdateAliens(Alien aliens[][LEVEL_WIDTH], int height) {
                 // ... other code ...
 
                 alien->position.x += currentDirection * ALIEN_SPEED;
-                // Update and fire bullets for this alien
+                
                 FireBullet(alien);
-                UpdateBullet(alien);
             }
-
+            UpdateBullet(alien);
         }
     }
 }
@@ -119,7 +136,7 @@ void DrawAliens(Alien aliens[][LEVEL_WIDTH], int height) {
 }
 
 
-void HandleAlienCollisionsWithLaser(Laser* laser, Alien aliens[][LEVEL_WIDTH], int height) {
+void HandleAlienCollisionsWithLaser(Laser* laser, Alien aliens[][LEVEL_WIDTH], int height, int* score) {
     Rectangle laserRect = { laser->x, laser->y, LASER_WIDTH, LASER_HEIGHT };
 
     for (int i = 0; i < height; i++)
@@ -132,6 +149,7 @@ void HandleAlienCollisionsWithLaser(Laser* laser, Alien aliens[][LEVEL_WIDTH], i
             if (CheckCollisionRecs((Rectangle) { cur->position.x, cur->position.y, cur->image.width, cur->image.height }, laserRect)) {
                 if (cur->lives > 0) cur->lives--;
                 laser->active = false;
+                (*score) += 10;
                 break;
             }
         }
@@ -178,10 +196,13 @@ void HandleBulletCollisionWithSpaceship(Spaceship* s, Alien* alien)
 {
     for (int i = 0; i < MAX_BULLETS; i++) {
         Bullet* b = &alien->bullets[i];
-        if (CheckCollisionCircleRec((Vector2) { b->x, b->y }, PIXEL_SIZE, (Rectangle) { s->position.x, s->position.y, s->image.width, s->image.height }))
+        if (b->active)
         {
-            s->lives--;
-            b->active = false;
+            if (CheckCollisionCircleRec((Vector2) { b->x, b->y }, PIXEL_SIZE, (Rectangle) { s->position.x, s->position.y, s->image.width, s->image.height }))
+            {
+                s->lives--;
+                b->active = false;
+            }
         }
     }
     

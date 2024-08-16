@@ -6,7 +6,7 @@ void UpdateBullet(Alien* alien) {
         if (bullet->active) {
             bullet->y += bullet->speed;
 
-            if (bullet->y > GetScreenHeight() || bullet->y < 0) {
+            if (bullet->y > GetScreenHeight() - BOTTOMBAR_HEIGHT || bullet->y < 0) {
                 bullet->active = false;
             }
             DrawCircle(alien->bullets[i].x, alien->bullets[i].y, PIXEL_SIZE, RED);

@@ -12,7 +12,7 @@
 void InitializeAliens(Alien aliens[][LEVEL_WIDTH], int levelDesign[][LEVEL_WIDTH], int);
 void UpdateAliens(Alien aliens[][LEVEL_WIDTH], int height);
 void DrawAliens(Alien aliens[][LEVEL_WIDTH], int height);
-void HandleAlienCollisionsWithLaser(Laser* laser, Alien aliens[][LEVEL_WIDTH], int height);
+void HandleAlienCollisionsWithLaser(Laser* laser, Alien aliens[][LEVEL_WIDTH], int height, int* score);
 void FireBullet(Alien* );
 void HandleBulletCollisionWithObstacles(Obstacle [], Alien*);
 void HandleBulletCollisionWithSpaceship(Spaceship*, Alien*);

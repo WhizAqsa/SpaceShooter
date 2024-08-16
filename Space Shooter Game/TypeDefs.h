@@ -14,8 +14,9 @@
 #define PIXEL_SIZE 3
 #define OBSTACLES_SIZE 4
 
-#define GRID_ROWS 13 
+#define GRID_ROWS 4
 #define GRID_COL 23
+#define BOTTOMBAR_HEIGHT 60
 
 #define LEVEL_WIDTH 8
 

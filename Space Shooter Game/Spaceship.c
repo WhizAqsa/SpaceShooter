@@ -7,7 +7,7 @@ void FireLaser(Spaceship* spaceship)
 			if (!spaceship->lasers[i].active) {
 				spaceship->lasers[i].x = spaceship->position.x + spaceship->image.width / 2 - 2;
 				spaceship->lasers[i].y = spaceship->position.y;
-				spaceship->lasers[i].speed = -6;
+				spaceship->lasers[i].speed = -12;
 				spaceship->lasers[i].active = true;
 				spaceship->lastFireTime = GetTime();
 				break;
