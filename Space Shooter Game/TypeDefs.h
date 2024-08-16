@@ -41,6 +41,7 @@ typedef struct Spaceship {
 	Vector2 position;
 	Laser lasers[MAX_LASERS];
 	double lastFireTime;
+	int lives;
 } Spaceship;
 
 typedef struct Bullet {

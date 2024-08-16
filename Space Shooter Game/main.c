@@ -42,9 +42,10 @@ int main() {
 	//load image here
 	Image spaceshipImage = LoadImage("images/spaceship.png");
 	s.image = LoadTextureFromImage(spaceshipImage);
-	s.position.x = (GetScreenWidth() - spaceshipImage.width)/2;
-	s.position.y = GetScreenHeight()-spaceshipImage.height;
+	s.position.x = ((float)GetScreenWidth() - spaceshipImage.width) / 2;
+	s.position.y = GetScreenHeight() - spaceshipImage.height;
 	s.lastFireTime = 0.0;
+	s.lives = 3;
 
 	// Initialize the spaceship's lasers
 	for (int i = 0; i < MAX_LASERS; i++) {
@@ -111,6 +112,18 @@ int main() {
 
 			HandleObstalesCollisionsWithLaser(laser, obstacles);
 			HandleAlienCollisionsWithLaser(laser, aliens, currentLevelHeight);
+		}
+
+		for (int i = 0; i < currentLevelHeight; i++)
+		{
+			for (int j = 0; j < LEVEL_WIDTH; j++)
+			{
+				Alien* cur = &aliens[i][j];
+
+				HandleBulletCollisionWithObstacles(obstacles, cur);
+				HandleBulletCollisionWithSpaceship(&s, cur);
+
+			}
 		}
 
 

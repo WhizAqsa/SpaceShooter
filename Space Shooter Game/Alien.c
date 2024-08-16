@@ -154,22 +154,35 @@ void FireBullet(Alien* alien)
         }
     }
 }
-void HandleBulletCollisionWithObstacles(Obstacle obstacles[], Bullet* b,Alien* alien) 
+
+void HandleBulletCollisionWithObstacles(Obstacle obstacles[], Alien* alien) 
 {
-    if (!b->active) return;
+    for (int i = 0; i < MAX_BULLETS; i++) {
+        Bullet* b = &alien->bullets[i];
+        if (!b->active) continue;
 
-    for (int i = 0; i < OBSTACLES_SIZE; i++)
-    {
-        Obstacle* ob = &obstacles[i];
-        Vector2 center = { b->x, b->y };
-        if (!CheckCollisionCircleRec(center, PIXEL_SIZE, (Rectangle) { ob->x, ob->y, GRID_COL* PIXEL_SIZE, GRID_ROWS* PIXEL_SIZE }))
-            continue;
+        for (int i = 0; i < OBSTACLES_SIZE; i++)
+        {
+            Obstacle* ob = &obstacles[i];
+            Vector2 center = { b->x, b->y };
+            if (!CheckCollisionCircleRec(center, PIXEL_SIZE, (Rectangle) { ob->x, ob->y, GRID_COL* PIXEL_SIZE, GRID_ROWS* PIXEL_SIZE }))
+                continue;
 
-        HandleObstacleCollisionWithCircle(ob, center, PIXEL_SIZE);
-        b->active = false;
-        break;
+            HandleObstacleCollisionWithCircle(ob, center, PIXEL_SIZE);
+            b->active = false;
+            break;
+        }
     }
 }
-void HandleBulletCollisionWithSpaceship(Spaceship* s, Bullet* b) {
-
+void HandleBulletCollisionWithSpaceship(Spaceship* s, Alien* alien)
+{
+    for (int i = 0; i < MAX_BULLETS; i++) {
+        Bullet* b = &alien->bullets[i];
+        if (CheckCollisionCircleRec((Vector2) { b->x, b->y }, PIXEL_SIZE, (Rectangle) { s->position.x, s->position.y, s->image.width, s->image.height }))
+        {
+            s->lives--;
+            b->active = false;
+        }
+    }
+    
 }

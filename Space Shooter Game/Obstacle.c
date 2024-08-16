@@ -44,7 +44,7 @@ void HandleObstalesCollisionsWithLaser(Laser* laser, Obstacle obstacles[])
 	}
 }
 
-void HandleObstacleCollisionWithCircle(Obstacle* ob, Vector2 center, int radius) 
+void HandleObstacleCollisionWithCircle(Obstacle* ob, Vector2 center, int radius)
 {
 	for (unsigned int row = 0; row < GRID_ROWS; row++) {
 		for (unsigned int col = 0; col < GRID_COL; col++) {

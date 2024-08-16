@@ -14,8 +14,8 @@ void UpdateAliens(Alien aliens[][LEVEL_WIDTH], int height);
 void DrawAliens(Alien aliens[][LEVEL_WIDTH], int height);
 void HandleAlienCollisionsWithLaser(Laser* laser, Alien aliens[][LEVEL_WIDTH], int height);
 void FireBullet(Alien* );
-void HandleBulletCollisionWithObstacles(Obstacle [], Bullet*);
-void HandleBulletCollisionWithSpaceship(Spaceship*, Bullet*);
+void HandleBulletCollisionWithObstacles(Obstacle [], Alien*);
+void HandleBulletCollisionWithSpaceship(Spaceship*, Alien*);
 #endif // !_ALIEN_
 
 
